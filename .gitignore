@@ -1,0 +1,5 @@
+*.img
+*.bin
+limine-install
+bin/
+build/
