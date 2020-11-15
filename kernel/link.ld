@@ -2,8 +2,9 @@ ENTRY(kmain)
 
 SECTIONS
 {
-    . = 0xffffffff80000000;
-    virtualaddr = .;
+    kernel_phys_offset = 0xffffffff80000000;
+    . = kernel_phys_offset + 0x100000;
+
 
     .stivale2hdr ALIGN(4K) :
     {
@@ -15,13 +16,20 @@ SECTIONS
         KEEP(*(.text*))
     }
 
+    .rodata ALIGN(4K) :
+    {
+        KEEP(*(.rodata*))
+    }
+
     .data ALIGN(4K) :
     {
-        KEEP(*(.text*))
+        KEEP(*(.data*))
     }
 
     .bss ALIGN(4K) :
     {
-        KEEP(*(.text*))
+        KEEP(*(.bss*))
     }
+
+    kernelend = .;
 }

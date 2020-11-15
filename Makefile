@@ -18,6 +18,11 @@ create-image: $(BOOTABLE_IMG)
 run-qemu: $(BOOTABLE_IMG)
 	qemu-system-x86_64 -m 2G -hda $(BOOTABLE_IMG)
 
+# Run image on qemu debug mode
+
+run-qemu-debug: $(BOOTABLE_IMG)
+	qemu-system-x86_64 -m 2G -hda $(BOOTABLE_IMG) -S -s
+
 # Mostly clean (clean everything but the end result)
 
 mostlyclean:
@@ -43,7 +48,7 @@ mrproper: clean
 
 re: clean all
 
-.PHONY: all create-image run-qemu mostlyclean mclean clean fclean mrproper re
+.PHONY: all create-image run-qemu run-qemu-debug mostlyclean mclean clean fclean mrproper re
 
 # ---
 # Build target for kernel
@@ -52,7 +57,7 @@ re: clean all
 all-kernel: $(K_BIN)
 	$(call omsg,Kernel is stored at $(K_BIN))
 
-$(K_BIN): $(K_OBJS)
+$(K_BIN): $(K_OBJS) $(K_LDSCRIPT)
 	$(call qcmd,$(MKDIR) -p $(@D))
 	$(call bcmd,ld,$^,$(CC) $(K_LDFLAGS) -o $@ $^)
 
