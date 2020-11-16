@@ -1,6 +1,7 @@
 #ifndef H_BOOT_STIVALE2
 #define H_BOOT_STIVALE2
 #include <stdint.h>
+#include "util.h"
 
 
 struct stivale2_header {
@@ -22,7 +23,7 @@ struct stivale2_header {
     uint64_t tags;          // Pointer to the first of the linked list of tags.
                             // see "stivale2 header tags" section.
                             // NULL = no tags.
-} __attribute__((packed));
+} __PACKED;
 
 
 #endif /// #ifndef H_BOOT_STIVALE2

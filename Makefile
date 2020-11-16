@@ -16,12 +16,12 @@ create-image: $(BOOTABLE_IMG)
 # Run image on qemu
 
 run-qemu: $(BOOTABLE_IMG)
-	qemu-system-x86_64 -m 2G -hda $(BOOTABLE_IMG)
+	$(call qcmd,qemu-system-x86_64 -m 2G -hda $(BOOTABLE_IMG))
 
 # Run image on qemu debug mode
 
 run-qemu-debug: $(BOOTABLE_IMG)
-	qemu-system-x86_64 -m 2G -hda $(BOOTABLE_IMG) -S -s
+	$(call qcmd,qemu-system-x86_64 -m 2G -hda $(BOOTABLE_IMG) -S -s)
 
 # Mostly clean (clean everything but the end result)
 
@@ -82,7 +82,7 @@ $(K_OBJ_DIR)%.s: $(K_SRC_DIR)%.S
 # Bootable image run qemu etc
 # ---
 
-$(BOOTABLE_IMG): $(K_BIN)
+$(BOOTABLE_IMG): $(K_BIN) limine.cfg
 	$(call qcmd,$(RM) -f $@)
 	$(call qcmd,dd if=/dev/zero bs=1M count=0 seek=64 of=$@)
 	$(call qcmd,parted -s $@ mklabel msdos)

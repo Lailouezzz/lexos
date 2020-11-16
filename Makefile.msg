@@ -2,7 +2,7 @@
 #---
 # The make file for print beautiful log
 #---
-MAKE_FULL_LOG := y
+MAKE_FULL_LOG := 
 # Define color
 BUILD_COLOR = \033[1;32m
 RM_COLOR    = \033[1;31m
