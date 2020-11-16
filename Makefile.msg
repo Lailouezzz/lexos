@@ -39,7 +39,7 @@ endef
 # arg1 : executed command
 # execute <arg1>
 define qcmd
-	$(if $(MAKE_FULL_LOG),,@)$1 $(if $(MAKE_FULL_LOG),,> /dev/null 2>&1 &)
+	$(if $(MAKE_FULL_LOG),,@)$1 $(if $(MAKE_FULL_LOG),,> /dev/null 2>&1)
 endef
 
 # Normal message
