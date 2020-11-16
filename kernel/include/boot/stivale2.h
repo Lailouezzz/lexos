@@ -4,7 +4,7 @@
 #include "util.h"
 
 
-struct stivale2_header {
+typedef struct {
     uint64_t entry_point;   // If not 0, this address will be jumped to as the
                             // entry point of the kernel.
                             // If set to 0, the ELF entry point will be used
@@ -23,7 +23,16 @@ struct stivale2_header {
     uint64_t tags;          // Pointer to the first of the linked list of tags.
                             // see "stivale2 header tags" section.
                             // NULL = no tags.
-} __PACKED;
+} __PACKED stivale2_header_s;
+
+typedef struct {
+    char bootloader_brand[64];    // Bootloader null-terminated brand string
+    char bootloader_version[64];  // Bootloader null-terminated version string
+
+    uint64_t tags;          // Pointer to the first of the linked list of tags.
+                            // see "stivale2 structure tags" section.
+                            // NULL = no tags.
+} __PACKED stivale2_struct_s;
 
 
 #endif /// #ifndef H_BOOT_STIVALE2

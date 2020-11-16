@@ -16,17 +16,17 @@ typedef struct {
     uint32_t    base_low24 : 24;
     uint16_t    flags;
     uint8_t     base_high8;
-} __PACKED gdt_entry_t;
+} __PACKED gdt_entry_s;
 
 typedef struct {
     uint16_t    limit;
     uint64_t    base;
-} __PACKED gdt_pointer_t;
+} __PACKED gdt_pointer_s;
 
 
-extern gdt_entry_t gdt_entries[3];
+extern gdt_entry_s gdt_entries[3];
 
-extern gdt_pointer_t gdt_pointer;
+extern gdt_pointer_s gdt_pointer;
 
 
 void init_gdt(void);

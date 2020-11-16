@@ -9,6 +9,13 @@ init_gdt:
     ; load gdtr register
     lgdt [gdt_pointer]
 
+    
+    ; switch to 0x08 CS
+    push QWORD 0x08
+    push QWORD .flush
+    retfq
+.flush:
+
     ; update segments
     mov ax, 0x10
     mov ds, ax
@@ -16,6 +23,4 @@ init_gdt:
     mov es, ax
     mov gs, ax
     mov fs, ax
-    ;jmp 0x08:.flush
-.flush:
-    ret
+    retq
