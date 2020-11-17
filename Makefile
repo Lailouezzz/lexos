@@ -34,15 +34,16 @@ mclean: mostlyclean
 # Clean everything
 
 clean: mostlyclean
-	$(call rmsg,Removing the output binary folder ($(BIN_DIR)) and $(BOOTABLE_IMG))
+	$(call rmsg,Removing the output binary folder ($(BIN_DIR)))
 	$(call qcmd,$(RM) -rf $(BIN_DIR))
-	$(call qcmd,$(RM) -f $(BOOTABLE_IMG))
 
 fclean: clean
 
 # To original state
 
 mrproper: clean
+	$(call rmsg,Removing the bootable image ($(BOOTABLE_IMG)))
+	$(call qcmd,$(RM) -f $(BOOTABLE_IMG))
 
 # Remake everything
 
