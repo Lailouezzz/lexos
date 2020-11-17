@@ -2,8 +2,8 @@ ENTRY(kmain)
 
 SECTIONS
 {
-    kernel_phys_offset = 0xffffffff80000000;
-    . = kernel_phys_offset + 0x100000;
+    kernel_virt_offset = 0xffffffff80000000;
+    . = kernel_virt_offset + 0x100000;
 
 
     .stivale2hdr ALIGN(4K) :
@@ -31,5 +31,5 @@ SECTIONS
         KEEP(*(.bss*))
     }
 
-    kernelend = .;
+    kernel_end = .;
 }
