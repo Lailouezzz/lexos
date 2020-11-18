@@ -25,7 +25,6 @@ typedef struct {
 
 
 extern gdt_entry_s gdt_entries[3];
-
 extern gdt_pointer_s gdt_pointer;
 
 

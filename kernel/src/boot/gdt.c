@@ -1,4 +1,4 @@
-#include "boot/GDT.h"
+#include "boot/gdt.h"
 
 
 /* Define the GDT */

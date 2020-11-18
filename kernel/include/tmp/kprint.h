@@ -2,7 +2,7 @@
 #define H_TMP_KPRINT
 #include <stdint.h>
 #include <stdarg.h>
-#include "io/port.h"
+#include "asm/ioport.h"
 
 
 #define VGA_CHAR_BY_LINE    80

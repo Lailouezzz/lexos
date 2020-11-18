@@ -1,5 +1,5 @@
-#ifndef H_IO_PORT
-#define H_IO_PORT
+#ifndef H_ASM_IOPORT
+#define H_ASM_IOPORT
 
 
 /* OUTPUT */
@@ -69,5 +69,4 @@
 })
 
 
-
-#endif /// #ifndef H_IO_PORT
+#endif /// #ifndef H_ASM_IOPORT
