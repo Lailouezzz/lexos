@@ -35,12 +35,14 @@ define cmd
 	$(if $(MAKE_FULL_LOG),,@)$3
 endef
 
+
 # Quiet command if full log is disabled
 # arg1 : executed command
 # execute <arg1>
 define qcmd
 	$(if $(MAKE_FULL_LOG),,@)$1 $(if $(MAKE_FULL_LOG),,> /dev/null 2>&1)
 endef
+
 
 # Normal message
 # arg1 : printed message
@@ -50,6 +52,7 @@ define msg
 	$(if $(MAKE_FULL_LOG),, \
 @printf "$2""> ""$(NO_COLOR)""$1""$(NO_COLOR)""\n")
 endef
+
 
 # OK message
 # arg1 : printed message

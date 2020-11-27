@@ -52,10 +52,38 @@ re: clean all
 .PHONY: all create-image run-qemu run-qemu-debug mostlyclean mclean clean fclean mrproper re
 
 # ---
+# Build target for libk
+# ---
+
+all-libk: $(LIBK_A)
+	$(call omsg,libk is stored at $(LIBK_A))
+
+$(LIBK_A): $(LIBK_OBJS)
+	$(call qcmd,$(MKDIR) -p $(@D))
+	$(call bcmd,ar,$^,$(AR) rcs $@ $^)
+
+# Build libk C file
+$(LIBK_OBJ_DIR)%.c.o: $(LIBK_SRC_DIR)%.c
+	$(call qcmd,$(MKDIR) -p $(@D))
+	$(call bcmd,cc,$<,$(CC) $(LIBK_CFLAGS) -o $@ $<)
+
+# Build kernel ASM file
+$(LIBK_OBJ_DIR)%.s.o: $(LIBK_OBJ_DIR)%.s
+	$(call qcmd,$(MKDIR) -p $(@D))
+	$(call bcmd,as,$<,$(AS) $(LIBK_ASFLAGS) -o $@ $<)
+
+# Preprocessor for asm files
+$(LIBK_OBJ_DIR)%.s: $(LIBK_SRC_DIR)%.S
+	$(call qcmd,$(MKDIR) -p $(@D))
+	$(call bcmd,pp,$<,$(CC) -E $(LIBK_ASPPFLAGS) -o $@ $<)
+
+-include $(LIBK_DEPS)
+
+# ---
 # Build target for kernel
 # ---
 
-all-kernel: $(K_BIN)
+all-kernel: all-libk $(K_BIN)
 	$(call omsg,Kernel is stored at $(K_BIN))
 
 $(K_BIN): $(K_OBJS) $(K_LDSCRIPT)
@@ -65,17 +93,17 @@ $(K_BIN): $(K_OBJS) $(K_LDSCRIPT)
 # Build kernel C file
 $(K_OBJ_DIR)%.c.o: $(K_SRC_DIR)%.c
 	$(call qcmd,$(MKDIR) -p $(@D))
-	$(call bcmd,cc,$@,$(CC) $(K_CFLAGS) -o $@ $<)
+	$(call bcmd,cc,$<,$(CC) $(K_CFLAGS) -o $@ $<)
 
 # Build kernel ASM file
 $(K_OBJ_DIR)%.s.o: $(K_OBJ_DIR)%.s
 	$(call qcmd,$(MKDIR) -p $(@D))
-	$(call bcmd,as,$@,$(AS) $(K_ASFLAGS) -o $@ $<)
+	$(call bcmd,as,$<,$(AS) $(K_ASFLAGS) -o $@ $<)
 
 # Preprocessor for asm files
 $(K_OBJ_DIR)%.s: $(K_SRC_DIR)%.S
 	$(call qcmd,$(MKDIR) -p $(@D))
-	$(call bcmd,pp,$@,$(CC) -E $(K_ASPPFLAGS) -o $@ $<)
+	$(call bcmd,pp,$<,$(CC) -E $(K_ASPPFLAGS) -o $@ $<)
 
 -include $(K_DEPS)
 
@@ -94,3 +122,5 @@ $(BOOTABLE_IMG): $(K_BIN) limine.cfg
 	$(call qcmd,echfs-utils -m -p0 $@ import ../limine/stage2.map stage2.map)
 	$(call qcmd,../limine/limine-install ../limine/limine.bin $@)
 	$(call omsg,You can now run the $(BOOTABLE_IMG) on qemu (make run-qemu))
+
+.PHONY: all-libk all-kernel

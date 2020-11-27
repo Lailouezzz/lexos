@@ -6,7 +6,7 @@
 
 
 #define VGA_CHAR_BY_LINE    80
-#define VGA_TEXT_FB         0xB8000
+#define VGA_TEXT_FB         ((uintptr_t)0xB8000)
 
 
 int vga_text_putc(const char c);
