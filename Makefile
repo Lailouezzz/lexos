@@ -56,11 +56,11 @@ re: clean all
 # ---
 
 all-libk: $(LIBK_A)
-	$(call omsg,libk is stored at $(LIBK_A))
 
 $(LIBK_A): $(LIBK_OBJS)
 	$(call qcmd,$(MKDIR) -p $(@D))
 	$(call bcmd,ar,$^,$(AR) rcs $@ $^)
+	$(call omsg,libk is stored at $(LIBK_A))
 
 # Build libk C file
 $(LIBK_OBJ_DIR)%.c.o: $(LIBK_SRC_DIR)%.c
@@ -83,12 +83,12 @@ $(LIBK_OBJ_DIR)%.s: $(LIBK_SRC_DIR)%.S
 # Build target for kernel
 # ---
 
-all-kernel: all-libk $(K_BIN)
-	$(call omsg,Kernel is stored at $(K_BIN))
+all-kernel: $(K_BIN)
 
-$(K_BIN): $(K_OBJS) $(K_LDSCRIPT)
+$(K_BIN): $(K_OBJS) $(K_LDSCRIPT) $(LIBK_A)
 	$(call qcmd,$(MKDIR) -p $(@D))
 	$(call bcmd,ld,$^,$(CC) $(K_LDFLAGS) -o $@ $^)
+	$(call omsg,Kernel is stored at $(K_BIN))
 
 # Build kernel C file
 $(K_OBJ_DIR)%.c.o: $(K_SRC_DIR)%.c
