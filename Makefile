@@ -85,7 +85,7 @@ $(LIBK_OBJ_DIR)%.s: $(LIBK_SRC_DIR)%.S
 
 all-kernel: $(K_BIN)
 
-$(K_BIN): $(K_OBJS) $(K_LDSCRIPT) $(LIBK_A)
+$(K_BIN): $(LIBK_A) $(K_LDSCRIPT) $(K_OBJS)
 	$(call qcmd,$(MKDIR) -p $(@D))
 	$(call bcmd,ld,$^,$(CC) $(K_LDFLAGS) -o $@ $^)
 	$(call omsg,Kernel is stored at $(K_BIN))
