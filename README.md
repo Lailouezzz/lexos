@@ -2,7 +2,7 @@
 
 ## Build
 
-To build LexOS you have to clone [limine](https://github.com/limine-bootloader/limine) in the parent directory (``../``)
+To build LexOS you have to clone [limine](https://github.com/limine-bootloader/limine) in the parent directory (``cd ../ && git clone https://github.com/limine-bootloader/limine.git``)
 
 ## TODO
 
