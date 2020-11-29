@@ -1,7 +1,7 @@
 #include "boot/stivale2.h"
 
 
-static uint8_t stack[8192] = { 0 };
+extern uint8_t stack[0x2000];
 
 
 __SECTION(".stivale2hdr")

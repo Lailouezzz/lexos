@@ -4,3 +4,4 @@ limine-install
 bin/
 build/
 .*/
+Makefile.cfg

@@ -31,5 +31,12 @@ SECTIONS
         KEEP(*(.bss*))
     }
 
+    .stack ALIGN(4K) :
+    {
+        stack = .;
+        . = . + 0x2000;
+    }
+
+
     kernel_end = .;
 }
