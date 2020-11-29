@@ -6,7 +6,7 @@
 /* 
  * This routine check cpu capability
  */
-void check_cpu(void)
+void cpu_check(void)
 {
     uint32_t a;
     uint32_t b;

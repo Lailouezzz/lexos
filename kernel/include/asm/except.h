@@ -12,13 +12,13 @@
 #define EXCEPT_UD_VEC    06  /* Invalid opcode */
 #define EXCEPT_NM_VEC    07  /* Device note available (no math coprocessor) */
 #define EXCEPT_DF_VEC    08  /* Double fault */
-/* #define EXCEPT_VEC    09  /* Coprocessor segment overrune (reserved) */
+/* #define EXCEPT_VEC    09     Coprocessor segment overrune (reserved) */
 #define EXCEPT_TS_VEC    10  /* Invalid TSS */
 #define EXCEPT_NP_VEC    11  /* Segment not present */
 #define EXCEPT_SS_VEC    12  /* Stack segment fault */
 #define EXCEPT_GP_VEC    13  /* General protection */
 #define EXCEPT_PF_VEC    14  /* Page fault */
-/* #define EXCEPT_VEC    15  /* Intel reserved */
+/* #define EXCEPT_VEC    15     Intel reserved */
 #define EXCEPT_MF_VEC    16  /* x87 FPU Floating-point error */
 #define EXCEPT_AC_VEC    17  /* Alignment check */
 #define EXCEPT_MC_VEC    18  /* Machine check */

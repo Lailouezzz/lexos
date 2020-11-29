@@ -5,15 +5,15 @@
 #include "tmp/kprint.h"
 
 
-void kmain(stivale2_struct_s *arg)
+void kmain(stivale2_struct_s *args)
 {
     kprint("Check CPU.\n");
-    check_cpu();
+    cpu_check();
     kprint("Init GDT.\n");
-    init_gdt();
+    gdt_init();
     kprint("Init IDT.\n");
-    init_idt();
-    asm volatile("int $0");
-
-    asm volatile ("hlt\n\t");
+    idt_init();
+    asm volatile("int $3");
+    for (;;)
+        asm volatile ("hlt\n\t");
 }

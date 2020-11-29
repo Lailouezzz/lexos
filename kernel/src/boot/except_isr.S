@@ -1,10 +1,12 @@
 #include "asm/except.h"
 
+
 extern except_handler
 
 
 bits 64
 section .text
+
 
 ; push all registers
 %macro pushaq   0

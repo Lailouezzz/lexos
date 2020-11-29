@@ -28,7 +28,7 @@ extern gdt_entry_s gdt_entries[3];
 extern gdt_pointer_s gdt_pointer;
 
 
-void init_gdt(void);
+void gdt_init(void);
 
 
 #endif /// #ifndef H_BOOT_GDT

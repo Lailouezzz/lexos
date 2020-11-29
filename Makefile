@@ -1,5 +1,5 @@
+#!/usr/bin/make -f
 include Makefile.vars Makefile.msg
-
 
 # ---
 # General targets
@@ -21,6 +21,9 @@ run-qemu: $(BOOTABLE_IMG)
 # Run image on qemu debug mode
 
 run-qemu-debug: $(BOOTABLE_IMG)
+	$(if $(DEBUG),, \
+		$(call wmsg,Warning : debugging with qemu without debug symbols) \
+	)
 	$(call qcmd,qemu-system-x86_64 -m 2G -hda $(BOOTABLE_IMG) -S -s)
 
 # Mostly clean (clean everything but the end result)
@@ -34,7 +37,7 @@ mclean: mostlyclean
 # Clean everything
 
 clean: mostlyclean
-	$(call rmsg,Removing the output binary folder ($(BIN_DIR)))
+	$(call rmsg,Removing the binary folder ($(BIN_DIR)))
 	$(call qcmd,$(RM) -rf $(BIN_DIR))
 
 fclean: clean
@@ -44,6 +47,8 @@ fclean: clean
 mrproper: clean
 	$(call rmsg,Removing the bootable image ($(BOOTABLE_IMG)))
 	$(call qcmd,$(RM) -f $(BOOTABLE_IMG))
+	$(call rmsg,Removing the makefile configuration)
+	$(call qcmd,$(RM) -f Makefile.cfg)
 
 # Remake everything
 
@@ -124,3 +129,10 @@ $(BOOTABLE_IMG): $(K_BIN) limine.cfg
 	$(call omsg,You can now run the $(BOOTABLE_IMG) on qemu (make run-qemu))
 
 .PHONY: all-libk all-kernel
+
+# ---
+# Errors targets
+# ---
+
+Makefile.cfg:
+	$(error "Makefile.cfg missing did you configure ?" )

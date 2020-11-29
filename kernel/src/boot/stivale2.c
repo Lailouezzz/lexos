@@ -3,6 +3,7 @@
 
 static uint8_t stack[8192] = { 0 };
 
+
 __SECTION(".stivale2hdr")
 stivale2_header_s stivale2hdr = {
     .entry_point = 0,

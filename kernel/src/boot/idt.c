@@ -26,10 +26,11 @@ idt_pointer_s idt_pointer = {
 };
 
 
-void init_idt(void)
+void idt_init(void)
 {
     /* Set exceptions entries */
-    for (int i = 0;i < sizeof(except_isr_table) / sizeof(*except_isr_table);i++)
+    for (size_t i = 0;
+            i < sizeof(except_isr_table) / sizeof(*except_isr_table); i++)
     {
         if (except_isr_table[i])
         {

@@ -32,7 +32,7 @@ int vga_text_putc(const char c)
 
 void vga_text_set_color(const uint8_t forcolor, const uint8_t backcolor)
 {
-    uint8_t current_color = (forcolor & 0x0F) | (backcolor << 4);
+    current_color = (forcolor & 0x0F) | (backcolor << 4);
     return;
 }
 
@@ -169,7 +169,7 @@ int kvprint(const char *fmt, va_list args)
             break;
         }
     }
-
+    return 0;
 }
 
 int kprint(const char *fmt, ...)

@@ -1,6 +1,7 @@
 #ifndef H_BOOT_IDT
 #define H_BOOT_IDT
 #include <stdint.h>
+#include <stddef.h>
 #include "util.h"
 
 
@@ -24,7 +25,7 @@ extern idt_entry_s idt_entries[256];
 extern idt_pointer_s idt_pointer;
 
 
-void init_idt(void);
+void idt_init(void);
 
 
 #endif /// #ifndef H_BOOT_IDT

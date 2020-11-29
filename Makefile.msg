@@ -2,12 +2,15 @@
 #---
 # The make file for print beautiful log
 #---
-MAKE_FULL_LOG := 
+include Makefile.cfg
+
+
 # Define color
 BUILD_COLOR = \033[1;32m
 RM_COLOR    = \033[1;31m
 OK_COLOR    = \033[1;32m
 ERR_COLOR   = \033[1;31m
+WARN_COLOR  = \033[1;34m
 NO_COLOR    = \033[0m
 
 # Newline - comes handy in some situations
@@ -78,6 +81,14 @@ endef
 # display "> <arg1>"
 define rmsg
 	$(call msg,$1,$(RM_COLOR))
+endef
+
+
+# Warning message
+# arg1 : printed file or dir removed
+# display "> <arg1>"
+define wmsg
+	$(call msg,$1,$(WARN_COLOR))
 endef
 
 

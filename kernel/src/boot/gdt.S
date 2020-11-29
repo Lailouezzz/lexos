@@ -1,11 +1,13 @@
 extern gdt_pointer
-global init_gdt
+global gdt_init
+
 
 bits 64
 section .text
 
-; void init_gdt(void)
-init_gdt:
+
+; void gdt_init(void)
+gdt_init:
     ; load gdtr register
     lgdt [gdt_pointer]
 

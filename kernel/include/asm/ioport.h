@@ -44,7 +44,6 @@
     v;                                  \
 })
 
-
 #define PORT_INW(port) ({               \
     uint16_t v;                         \
     asm volatile (                      \
@@ -55,7 +54,6 @@
     );                                  \
     v;                                  \
 })
-
 
 #define PORT_IND(port) ({               \
     uint32_t v;                         \
