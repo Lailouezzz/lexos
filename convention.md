@@ -89,7 +89,6 @@ How type & name is organized
 ### Name
 
 -   No upper case (except defines)
-
 -   Prefix local related (example : `acpi_[name]` or `idt_[name]`)
 
 ### Example
