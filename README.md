@@ -1,5 +1,7 @@
 # LexOS
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c102b79d379141e2b3ac54976504b96b)](https://app.codacy.com/gh/Lailouezzz/lexos?utm_source=github.com&utm_medium=referral&utm_content=Lailouezzz/lexos&utm_campaign=Badge_Grade)
+
 ## Build
 
 To build LexOS : 
