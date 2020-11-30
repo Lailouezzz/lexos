@@ -1,11 +1,8 @@
 # Header and declarations
 
-
 This section describe how write conventionnal header for LexOS.
 
-
 ## How header is structured
-
 
 This is the structure example of headers in LexOS
 (can be modified for good reason) :
@@ -85,13 +82,16 @@ How type & name is organized
 
 ### Type
 
--   `struct`        : [name]_s
--   `enum`          : [name]_e
--   `other types`   : [name]_t
+-   `struct`        : `[name]_s`
+
+-   `enum`          : `[name]_e`
+
+-   `other types`   : `[name]_t`
 
 ### Name
 
 -   No upper case (except defines)
+
 -   Prefix local related (example : `acpi_[name]` or `idt_[name]`)
 
 ### Example
@@ -118,8 +118,10 @@ typedef struct {
 } __PACKED idt_entry_s;
 ```
 
-# TODO
+## TODO
 
 -   Source convention
+
 -   Source tree convention
+
 -   Use the idea of a libk or delete this ?
