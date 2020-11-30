@@ -83,9 +83,7 @@ How type & name is organized
 ### Type
 
 -   `struct`        : `[name]_s`
-
 -   `enum`          : `[name]_e`
-
 -   `other types`   : `[name]_t`
 
 ### Name
@@ -121,7 +119,5 @@ typedef struct {
 ## TODO
 
 -   Source convention
-
 -   Source tree convention
-
 -   Use the idea of a libk or delete this ?

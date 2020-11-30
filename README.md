@@ -13,7 +13,6 @@ cd ../ && git clone https://github.com/limine-bootloader/limine.git
 cd limine && make limine-install
 ```
 
-
 Install [echfs](https://github.com/echfs/echfs) utils :
 
 ```sh
