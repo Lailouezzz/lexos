@@ -26,15 +26,9 @@ sudo make install
 
 ## TODO
 
--   Add a configure script (to be able to change de location of limine 
-installation)
-
--   Implement the ACPI
-
+-   Implement the ACPI tables and parsing
 -   Setup APIC
-
 -   PMM
-
 -   VMM
-
+-   VGA driver
 -   ...
