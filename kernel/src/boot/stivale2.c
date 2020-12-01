@@ -1,4 +1,5 @@
-#include "boot/stivale2.h"
+#include <stddef.h>
+#include "lexos/boot/stivale2.h"
 
 
 extern uint8_t stack[0x2000];

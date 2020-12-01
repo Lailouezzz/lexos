@@ -1,5 +1,5 @@
-#ifndef H_ASM_IOPORT
-#define H_ASM_IOPORT
+#ifndef H_LEXOS_ASM_IOPORT
+#define H_LEXOS_ASM_IOPORT
 
 
 /* OUTPUT */
@@ -67,4 +67,4 @@
 })
 
 
-#endif /// #ifndef H_ASM_IOPORT
+#endif /// #ifndef H_LEXOS_ASM_IOPORT

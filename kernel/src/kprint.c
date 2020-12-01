@@ -1,4 +1,4 @@
-#include "tmp/kprint.h"
+#include "lexos/kprint.h"
 
 
 /* Local variable */

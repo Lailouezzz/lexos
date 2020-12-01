@@ -1,7 +1,7 @@
-#ifndef H_BOOT_EXCEPT
-#define H_BOOT_EXCEPT
+#ifndef H_LEXOS_BOOT_EXCEPT
+#define H_LEXOS_BOOT_EXCEPT
 #include <stdint.h>
-#include "asm/except.h"
+#include "lexos/asm/except.h"
 #include "util.h"
 
 
@@ -28,4 +28,4 @@ typedef struct {
 extern uintptr_t except_isr_table[32];
 
 
-#endif /// #ifndef H_BOOT_EXCEPT
+#endif /// #ifndef H_LEXOS_BOOT_EXCEPT

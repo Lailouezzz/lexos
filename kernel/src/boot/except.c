@@ -1,5 +1,5 @@
-#include "boot/except.h"
-#include "tmp/kprint.h"
+#include "lexos/boot/except.h"
+#include "lexos/kprint.h"
 
 
 /* Called by ISR in isr.S 
@@ -8,7 +8,6 @@
 void except_handler(uint64_t exceptnum, regs_s *regs, uint64_t errcode)
 {
     /* TODO: real panic function */
-    kprint("PANIC EXCEPTION : %u\n", exceptnum);
-    for (;;)
-        asm volatile ("hlt");
+    kprint("PANIC : EXCEPTION : %u\n", exceptnum);
+    HALT();
 }

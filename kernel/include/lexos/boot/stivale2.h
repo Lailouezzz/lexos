@@ -1,5 +1,5 @@
-#ifndef H_BOOT_STIVALE2
-#define H_BOOT_STIVALE2
+#ifndef H_LEXOS_BOOT_STIVALE2
+#define H_LEXOS_BOOT_STIVALE2
 #include <stdint.h>
 #include "util.h"
 
@@ -35,4 +35,4 @@ typedef struct {
 } __PACKED stivale2_struct_s;
 
 
-#endif /// #ifndef H_BOOT_STIVALE2
+#endif /// #ifndef H_LEXOS_BOOT_STIVALE2

@@ -1,5 +1,5 @@
-#ifndef H_ASM_EXCEPT
-#define H_ASM_EXCEPT
+#ifndef H_LEXOS_ASM_EXCEPT
+#define H_LEXOS_ASM_EXCEPT
 
 
 /*          NAME   |  VEC NUM  |  DESCRIPTION                                 */
@@ -24,8 +24,8 @@
 #define EXCEPT_MC_VEC    18  /* Machine check */
 #define EXCEPT_XM_VEC    19  /* SIMD Floating-point exception */
 #define EXCEPT_VE_VEC    20  /* Virtualization exception */
-/*                      21 to 31 include is intel reserved*/
-/*                      32 to 255 are user defined*/
+/*                       21 to 31 include is intel reserved*/
+/*                       32 to 255 are user defined*/
 
 
-#endif /// #ifndef H_ASM_EXCEPT
+#endif /// #ifndef H_LEXOS_ASM_EXCEPT

@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <cpuid.h>
-#include "tmp/kprint.h"
+#include "lexos/kprint.h"
 
 
 /* 
@@ -15,13 +15,9 @@ void cpu_check(void)
 
     /* Check APIC present */
     __cpuid(0x01, a, b, c, d);
-    if (d & (1 << 9))
+    if (!(d & (1 << 9)))
     {
-        kprint("CPU has APIC.\n");
-    }
-    if (c & (1 << 21))
-    {
-        kprint("CPU has x2APIC.\n");
+        /* TODO : panic */
     }
 
 }

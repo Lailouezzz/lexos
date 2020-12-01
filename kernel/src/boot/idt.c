@@ -1,6 +1,5 @@
-#include "boot/idt.h"
-#include "boot/except.h"
-#include "tmp/kprint.h"
+#include "lexos/boot/idt.h"
+#include "lexos/kprint.h"
 
 
 #define SET_IDT_ENTRY(v, off, attr, sel, _ist) \

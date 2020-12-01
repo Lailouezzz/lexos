@@ -1,5 +1,5 @@
-#ifndef H_BOOT_GDT
-#define H_BOOT_GDT
+#ifndef H_LEXOS_BOOT_GDT
+#define H_LEXOS_BOOT_GDT
 #include <stdint.h>
 #include "util.h"
 
@@ -31,4 +31,4 @@ extern gdt_pointer_s gdt_pointer;
 void gdt_init(void);
 
 
-#endif /// #ifndef H_BOOT_GDT
+#endif /// #ifndef H_LEXOS_BOOT_GDT

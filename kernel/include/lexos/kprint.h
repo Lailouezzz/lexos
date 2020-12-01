@@ -1,8 +1,8 @@
-#ifndef H_TMP_KPRINT
-#define H_TMP_KPRINT
+#ifndef H_LEXOS_KPRINT
+#define H_LEXOS_KPRINT
 #include <stdint.h>
 #include <stdarg.h>
-#include "asm/ioport.h"
+#include "lexos/asm/ioport.h"
 
 
 #define VGA_CHAR_BY_LINE    80
@@ -18,4 +18,4 @@ int kvprint(const char *fmt, va_list args);
 int kprint(const char *fmt, ...);
 
 
-#endif /// #ifndef H_TMP_KPRINT
+#endif /// #ifndef H_LEXOS_KPRINT

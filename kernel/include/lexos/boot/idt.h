@@ -1,7 +1,8 @@
-#ifndef H_BOOT_IDT
-#define H_BOOT_IDT
+#ifndef H_LEXOS_BOOT_IDT
+#define H_LEXOS_BOOT_IDT
 #include <stdint.h>
 #include <stddef.h>
+#include "lexos/boot/except.h"
 #include "util.h"
 
 
@@ -28,4 +29,4 @@ extern idt_pointer_s idt_pointer;
 void idt_init(void);
 
 
-#endif /// #ifndef H_BOOT_IDT
+#endif /// #ifndef H_LEXOS_BOOT_IDT
