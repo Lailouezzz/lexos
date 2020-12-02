@@ -119,4 +119,3 @@ typedef struct {
 
 -   Source convention
 -   Source tree convention
--   Use the idea of a libk or delete this ?
