@@ -6,16 +6,14 @@
 #include "lexos/kprint.h"
 
 
-void kmain(stivale2_struct_s *args)
+void kmain(s2_struct_s *args)
 {
-    kprint("Check CPU.\n");
+    s2_init(args);
     cpu_check();
-    kprint("Init GDT.\n");
     gdt_init();
-    kprint("Init IDT.\n");
     idt_init();
-    kprint("Init ACPI driver.\n");
-    acpi_init();
+    acpi_init(((s2_tag_rsdp_s *)s2_get_tag(S2_ID_RSDP))->rsdp);
+
 
     kprint("Successfuly started.\n");
     HALT();

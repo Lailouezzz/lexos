@@ -11,5 +11,5 @@ gdt_entry_s gdt_entries[3] = {
 
 gdt_pointer_s gdt_pointer = {
     .limit = sizeof(gdt_entries),
-    .base  = (uintptr_t)gdt_entries
+    .base  = gdt_entries
 };

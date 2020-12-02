@@ -19,8 +19,8 @@ typedef struct {
 } __PACKED gdt_entry_s;
 
 typedef struct {
-    uint16_t    limit;
-    uint64_t    base;
+    uint16_t        limit;
+    gdt_entry_s *   base;
 } __PACKED gdt_pointer_s;
 
 

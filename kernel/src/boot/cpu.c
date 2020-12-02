@@ -3,9 +3,6 @@
 #include "lexos/kprint.h"
 
 
-/* 
- * This routine check cpu capability
- */
 void cpu_check(void)
 {
     uint32_t a;

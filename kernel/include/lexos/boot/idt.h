@@ -18,7 +18,7 @@ typedef struct {
 
 typedef struct  {
     uint16_t limit;
-    uint64_t offset;
+    idt_entry_s *offset;
 } __PACKED idt_pointer_s;
 
 

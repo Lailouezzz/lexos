@@ -61,7 +61,7 @@ If no comment is used you will do that :
 
 
 /**
- * HERE PUT THE LOCAL VARIABLE (extern first)
+ * HERE PUT THE LOCAL VARIABLE (extern first, static last)
  */
 
 

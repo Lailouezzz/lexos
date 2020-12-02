@@ -25,7 +25,7 @@ typedef struct {
 
 
 /* Defined in except_isr.S */
-extern uintptr_t except_isr_table[32];
+extern void * const except_isr_table[32];
 
 
 #endif /// #ifndef H_LEXOS_BOOT_EXCEPT

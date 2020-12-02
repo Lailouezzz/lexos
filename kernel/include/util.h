@@ -3,6 +3,7 @@
 
 
 #define HALT() asm volatile ("hlt")
+#define UNUSED(a) (void)(a)
 
 #define __PACKED __attribute__((packed))
 #define __SECTION(sec) __attribute__((section(sec)))

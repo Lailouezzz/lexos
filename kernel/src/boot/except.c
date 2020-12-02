@@ -7,6 +7,8 @@
  */
 void except_handler(uint64_t exceptnum, regs_s *regs, uint64_t errcode)
 {
+    UNUSED(regs);
+    UNUSED(errcode);
     /* TODO: real panic function */
     kprint("PANIC : EXCEPTION : %u\n", exceptnum);
     HALT();
