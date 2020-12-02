@@ -1,4 +1,5 @@
 #include <cpuid.h>
+#include "lexos/panic.h"
 
 #include "lexos/boot/cpu.h"
 
@@ -14,7 +15,7 @@ void cpu_check(void)
     __cpuid(0x01, a, b, c, d);
     if (!(d & (1 << 9)))
     {
-        /* TODO : panic */
+        panic(NULL, "APIC IS NOT PRESENT ON THIS CPU.\n");
     }
 
 }

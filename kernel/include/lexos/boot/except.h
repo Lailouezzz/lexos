@@ -1,6 +1,7 @@
 #ifndef H_LEXOS_BOOT_EXCEPT
 #define H_LEXOS_BOOT_EXCEPT
 #include <stdint.h>
+#include <stddef.h>
 #include "lexos/asm/except.h"
 #include "util.h"
 
@@ -21,7 +22,7 @@ typedef struct {
     uint64_t r13;
     uint64_t r14;
     uint64_t r15;
-} __PACKED regs_s;
+} __PACKED interrupt_stack_frame_s;
 
 
 /* Defined in except_isr.S */

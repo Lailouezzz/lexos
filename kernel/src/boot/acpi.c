@@ -1,23 +1,22 @@
 #include "lexos/boot/stivale2.h"
-#include "lexos/kprint.h"
+#include "lexos/panic.h"
 
 #include "lexos/boot/acpi.h"
 
 
 /* Local variable */
 
-static acpi_rsdp_s *acpi_rsdp_ptr = NULL;
+static acpi_rsdp_s *acpi_rsdp = NULL;
 
 
 void acpi_init()
 {
-    acpi_rsdp_ptr = ((s2_tag_rsdp_s *)s2_get_tag(S2_ID_RSDP))->rsdp;
-    if (!acpi_rsdp_ptr)
+    s2_tag_rsdp_s *tag_rsdp = ((s2_tag_rsdp_s *)s2_get_tag(S2_ID_RSDP));
+    if (!tag_rsdp)
     {
-        /* TODO : PANIC */
-        kprint("PANIC : could not find RSDP.\n");
-        HALT();
+        panic(NULL, "COULD NOT FIND RSDP.\n");
     }
+    acpi_rsdp = tag_rsdp->rsdp;
 
 
 }

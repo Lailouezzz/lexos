@@ -67,9 +67,9 @@ section .text
     pushaq
     ; initial rsp is now at rsp+15*8
 
-    mov rdi, %1         ; first arg is exceptnum
-    mov rsi, rsp        ; second arg is pointer to regs_s struct
-    mov rdx, [rsp+15*8] ; 3rd arg is the error code
+    mov rdi, %1         ; first is exceptnum
+    mov rsi, rsp        ; second is pointer to interrupt_stack_frame_s struct
+    mov rdx, [rsp+15*8] ; 3rd is the error code
 
     cld
     call except_handler  ; in exceptions.c

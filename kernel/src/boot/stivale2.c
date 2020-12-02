@@ -1,10 +1,15 @@
+#include "lexos/panic.h"
+
 #include "lexos/boot/stivale2.h"
 
 
 extern uint8_t stack[0x2000];
 
 
-/* TAG STRUCTS */
+/*
+ * TAG STRUCTS
+ */
+
 s2_tag_rsdp_s s2_rsdp = {
     {
         .id = S2_ID_RSDP,
@@ -13,7 +18,7 @@ s2_tag_rsdp_s s2_rsdp = {
     .rsdp = NULL
 };
 
-/* BOOT STRUCT */
+/* BOOT HEADER */
 __SECTION(".stivale2hdr")
 s2_header_s stivale2hdr = {
     .entry_point = NULL,
@@ -36,8 +41,7 @@ void s2_init(s2_struct_s *args)
     }
     else
     {
-        /* TODO : panic */
-        HALT();
+        panic(NULL, "STIVALE2 ARGS IS NULL.\n");
     }
     return;
 }
