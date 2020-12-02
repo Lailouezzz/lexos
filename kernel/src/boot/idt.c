@@ -1,5 +1,4 @@
 #include "lexos/boot/idt.h"
-#include "lexos/kprint.h"
 
 
 #define SET_IDT_ENTRY(v, off, attr, sel, _ist) \

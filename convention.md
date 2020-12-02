@@ -11,7 +11,10 @@ This is the structure example of headers in LexOS
 #ifndef H_[DIR]_[FILENAME]
 #define H_[DIR]_[FILENAME]
 #include <[stdheader]>
-#include "[projectrelated]"
+#include "[projectrelated1]"
+#include "[projectrelated2]"
+#include "[projectrelated3]"
+
 #include "[localheader]"
 
 
@@ -51,7 +54,10 @@ If no comment is used you will do that :
 #ifndef H_[DIR]_[FILENAME]
 #define H_[DIR]_[FILENAME]
 #include <[stdheader]>
-#include "[projectrelated]"
+#include "[projectrelated1]"
+#include "[projectrelated2]"
+#include "[projectrelated3]"
+
 #include "[localheader]"
 
 

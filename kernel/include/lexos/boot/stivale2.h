@@ -1,6 +1,7 @@
 #ifndef H_LEXOS_BOOT_STIVALE2
 #define H_LEXOS_BOOT_STIVALE2
 #include <stdint.h>
+#include <stddef.h>
 #include "lexos/boot/acpi.h"
 #include "util.h"
 
@@ -10,6 +11,7 @@
  */
 
 #define S2_ID_RSDP 0x9e1786930a375e78
+#define S2_ID_FIRMWARE 0x359d837855e3858c
 
 
 /*
@@ -24,15 +26,20 @@ typedef struct {
 
 typedef struct {
     s2_tag_s base;
-    acpi_rsdp_s *rsdp;
+    acpi_rsdp_s *rsdp;      // Pointer to the RSDP
 } __PACKED s2_tag_rsdp_s;
+
+typedef struct {
+    s2_tag_s base;
+    uint64_t flags;         // Bit 0: 0 = UEFI, 1 = BIOS
+} __PACKED s2_tag_firmware_s;
 
 /* Boot struct */
 typedef struct {
     char bootloader_brand[64];    // Bootloader null-terminated brand string
     char bootloader_version[64];  // Bootloader null-terminated version string
 
-    s2_tag_s *tags;   // Pointer to the first of the linked list of tags.
+    s2_tag_s *tags;         // Pointer to the first of the linked list of tags.
                             // see "stivale2 structure tags" section.
                             // NULL = no tags.
 } __PACKED s2_struct_s;
@@ -54,7 +61,7 @@ typedef struct {
     uint64_t flags;         // Bit 0: if 1, enable KASLR
                             // All other bits undefined
 
-    void *tags;   // Pointer to the first of the linked list of tags.
+    void *tags;             // Pointer to the first of the linked list of tags.
                             // see "stivale2 header tags" section.
                             // NULL = no tags.
 } __PACKED s2_header_s;

@@ -1,6 +1,6 @@
-#include <stdint.h>
 #include <cpuid.h>
-#include "lexos/kprint.h"
+
+#include "lexos/boot/cpu.h"
 
 
 void cpu_check(void)

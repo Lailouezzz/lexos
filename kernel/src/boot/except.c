@@ -1,5 +1,6 @@
-#include "lexos/boot/except.h"
 #include "lexos/kprint.h"
+
+#include "lexos/boot/except.h"
 
 
 /* Called by ISR in isr.S 

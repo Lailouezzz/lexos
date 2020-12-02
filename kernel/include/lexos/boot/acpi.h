@@ -2,7 +2,6 @@
 #define H_LEXOS_BOOT_ACPI
 #include <stdint.h>
 #include <stddef.h>
-#include "lexos/string.h"
 #include "util.h"
 
 
@@ -30,7 +29,7 @@ typedef struct {
 
 
 /* Init the acpi driver */
-void acpi_init(acpi_rsdp_s *rsdp);
+void acpi_init(void);
 
 
 #endif /// #ifndef H_LEXOS_BOOT_ACPI
