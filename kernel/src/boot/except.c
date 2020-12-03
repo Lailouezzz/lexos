@@ -43,14 +43,14 @@ static const char *exception_messages[32] = {
 /* Called by ISR in isr.S 
  * errcode can be undefined depend of exceptnum
  */
-void except_handler(uint64_t exceptnum, interrupt_stack_frame_s *stackframe,
-        uint64_t errcode)
+void except_handler(interrupt_stack_frame_s *stackframe)
 {
     /* TODO : handle task */
-    if (exceptnum < 32)
+    if (stackframe->intnum < 32)
     {
         panic(stackframe, "EXCEPTION : %s. (EXCEPTNUM : %u | ERRCODE : %u)\n",
-                exception_messages[exceptnum], exceptnum, errcode);
+                exception_messages[stackframe->intnum], stackframe->intnum,
+                stackframe->errcode);
     }
     else
     {

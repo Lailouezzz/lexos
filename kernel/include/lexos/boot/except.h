@@ -23,6 +23,13 @@ typedef struct {
     uint64_t r13;
     uint64_t r14;
     uint64_t r15;
+    uint64_t intnum;
+    uint64_t errcode;
+    uint64_t rip;
+    uint64_t cs;
+    uint64_t rflags;
+    uint64_t rsp;
+    uint64_t ss;
 } __PACKED interrupt_stack_frame_s;
 
 

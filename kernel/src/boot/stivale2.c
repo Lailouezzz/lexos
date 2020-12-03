@@ -46,7 +46,7 @@ void s2_init(s2_struct_s *args)
     return;
 }
 
-s2_tag_s *s2_get_tag(uint64_t id)
+s2_tag_s *s2_find_tag(uint64_t id)
 {
     s2_tag_s *cur = s2_frist_tag;
     while (cur != NULL)

@@ -66,5 +66,17 @@
     v;                                  \
 })
 
+/* WAIT */
+
+#define IO_WAIT() ({                    \
+    asm volatile (                      \
+        "jmp 1f\n\t"                    \
+        "1:\n\t"                        \
+        "jmp 2f\n\t"                    \
+        "2:"                            \
+        :                               \
+    );                                  \
+})
+
 
 #endif /// #ifndef H_LEXOS_ASM_IOPORT

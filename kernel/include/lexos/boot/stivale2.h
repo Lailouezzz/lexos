@@ -70,7 +70,7 @@ typedef struct {
 /* Init stivale2 local variables */
 void s2_init(s2_struct_s *args);
 /* Return stivale2 tag ptr if tag find, NULL if not */
-s2_tag_s *s2_get_tag(uint64_t id);
+s2_tag_s *s2_find_tag(uint64_t id);
 
 
 #endif /// #ifndef H_LEXOS_BOOT_STIVALE2

@@ -30,7 +30,7 @@ int acpi_checksum(const void *ptr, size_t size)
 
 void acpi_init()
 {
-    s2_tag_rsdp_s *tag_rsdp = ((s2_tag_rsdp_s *)s2_get_tag(S2_ID_RSDP));
+    s2_tag_rsdp_s *tag_rsdp = ((s2_tag_rsdp_s *)s2_find_tag(S2_ID_RSDP));
 
     if (!tag_rsdp)
     {
@@ -117,14 +117,28 @@ acpi_sdt_header_s *acpi_find_sdt_with_rsdt(uint32_t sign)
 
 acpi_sdt_header_s *acpi_find_sdt_with_xsdt(uint32_t sign)
 {
-    /* TODO : implement xsdt find */
+    acpi_xsdt_s *xsdt = acpi_rsdp2->pxsdt;
+
     if (sign == ACPI_XSDT_SIGN)
     {
         /* To be sure */
-        return *((uint32_t *)acpi_rsdp2->pxsdt->header.sign) == sign ?
-                (acpi_sdt_header_s *)acpi_rsdp2->pxsdt :
+        return *((uint32_t *)xsdt->header.sign) == sign ?
+                (acpi_sdt_header_s *)xsdt :
                 NULL;
     }
+
+    size_t numentries =
+            (xsdt->header.len - sizeof(xsdt->header)) / sizeof(xsdt->other);
+    acpi_sdt_header_s **other = &xsdt->other;
+
+    for (size_t i = 0; i < numentries; i++)
+    {
+        if (*((uint32_t *)other[i]->sign) == sign)
+        {
+            return other[i];
+        }
+    }
+
     return NULL;
 }
 

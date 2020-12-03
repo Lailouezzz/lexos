@@ -13,10 +13,16 @@ all: all-kernel
 
 create-image: $(BOOTABLE_IMG)
 
+create-uefi-image: $(UEFI_IMG)
+
 # Run image on qemu
 
 run-qemu: $(BOOTABLE_IMG)
 	$(call qcmd,qemu-system-x86_64 -m 2G -smp 4 -hda $(BOOTABLE_IMG))
+
+run-uefi-qemu: $(UEFI_IMG)
+	$(call qcmd,qemu-system-x86_64 -L /usr/share/edk2/ovmf/ -bios OVMF_CODE.fd \
+			-m 2G -smp 4 -hda $(UEFI_IMG))
 
 # Run image on qemu debug mode
 
@@ -25,6 +31,13 @@ run-qemu-debug: $(BOOTABLE_IMG)
 		$(call wmsg,Warning : debugging with qemu without debug symbols) \
 	)
 	$(call qcmd,qemu-system-x86_64 -m 2G -smp 4 -hda $(BOOTABLE_IMG) -S -s)
+
+run-uefi-qemu-debug: $(UEFI_IMG)
+	$(if $(DEBUG),, \
+		$(call wmsg,Warning : debugging with qemu without debug symbols) \
+	)
+	$(call qcmd,qemu-system-x86_64 -L /usr/share/edk2/ovmf/ -bios OVMF_CODE.fd \
+			-m 2G -smp 4 -hda $(UEFI_IMG) -S -s)
 
 # Mostly clean (clean everything but the end result)
 
@@ -37,6 +50,10 @@ mclean: mostlyclean
 # Clean everything
 
 clean: mostlyclean
+	$(call rmsg,Removing the bootable image ($(BOOTABLE_IMG)))
+	$(call qcmd,$(RM) -f $(BOOTABLE_IMG))
+	$(call rmsg,Removing the bootable image ($(UEFI_IMG)))
+	$(call qcmd,$(RM) -f $(UEFI_IMG))
 	$(call rmsg,Removing the binary folder ($(BIN_DIR)))
 	$(call qcmd,$(RM) -rf $(BIN_DIR))
 
@@ -45,8 +62,6 @@ fclean: clean
 # To original state
 
 mrproper: clean
-	$(call rmsg,Removing the bootable image ($(BOOTABLE_IMG)))
-	$(call qcmd,$(RM) -f $(BOOTABLE_IMG))
 	$(call rmsg,Removing the makefile configuration)
 	$(call qcmd,$(RM) -f Makefile.cfg)
 	$(call rmsg,Cleaning submodule limine)
@@ -56,7 +71,9 @@ mrproper: clean
 
 re: clean all
 
-.PHONY: all create-image run-qemu run-qemu-debug mostlyclean mclean clean fclean mrproper re
+.PHONY: all create-image create-uefi-image run-qemu run-qemu-debug \
+		run-uefi-qemu run-uefi-qemu-debug mostlyclean mclean clean \
+		fclean mrproper re
 
 # ---
 # Build target for kernel
@@ -87,7 +104,7 @@ $(K_OBJ_DIR)%.s: $(K_SRC_DIR)%.S
 -include $(K_DEPS)
 
 # ---
-# Bootable image run qemu etc
+# Bootable image
 # ---
 
 $(BOOTABLE_IMG): $(K_BIN) limine.cfg ./thirdparty/limine/limine-install
@@ -101,7 +118,18 @@ $(BOOTABLE_IMG): $(K_BIN) limine.cfg ./thirdparty/limine/limine-install
 	$(call qcmd,echfs-utils -m -p0 $@ import ../limine/stage2.map stage2.map)
 	$(call qcmd,./thirdparty/limine/limine-install \
 			./thirdparty/limine/limine.bin $@)
-	$(call omsg,You can now run the $(BOOTABLE_IMG) on qemu (make run-qemu))
+	$(call omsg,You can now run the $@ on qemu (make run-qemu))
+
+$(UEFI_IMG): $(K_BIN) tomatboot.cfg
+	$(call qcmd,$(RM) -f $@)
+	$(call qcmd,dd if=/dev/zero bs=1k count=0 seek=1440 of=$@)
+	$(call qcmd,mformat -i $@ -f 1440 ::)
+	$(call qcmd,mmd -i $@ ::/EFI)
+	$(call qcmd,mmd -i $@ ::/EFI/BOOT)
+	$(call qcmd,mcopy -i $@ ../TomatBoot/bin/BOOTX64.EFI ::/EFI/BOOT)
+	$(call qcmd,mcopy -i $@ ./tomatboot.cfg ::/)
+	$(call qcmd,mcopy -i $@ $(K_BIN) ::/)
+	$(call omsg,You can now run the $@ on qemu (make run-uefi-qemu))
 
 .PHONY: all-kernel
 

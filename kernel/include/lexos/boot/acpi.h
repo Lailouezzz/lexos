@@ -103,7 +103,7 @@ typedef struct {
 
 typedef struct {
     acpi_sdt_header_s header;
-    acpi_sdt_header_s other;    /* (&other)[i] to iterate */
+    acpi_sdt_header_s *other;   /* (&other)[i] to iterate */
 } __PACKED acpi_xsdt_s; /* USE header.len NOT sizeof */
 
 /*

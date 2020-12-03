@@ -48,34 +48,37 @@ section .text
 
 ; Low level ISR routine calling exception handler (NOERR)
 %macro except_isr_noerr 1
+    cli
+    push 0
+    push %1
     pushaq
     ; initial rsp is now at rsp+15*8
 
-    mov rdi, %1     ; first arg is exceptnum
-    mov rsi, rsp    ; second arg is pointer to regs_s struct
-    mov rdx, 0      ; 3rd is the error code
+    mov rdi, rsp    ; pointer to regs_s struct
 
     cld
     call except_handler  ; in exceptions.c
 
     popaq
+    add rsp, 16          ; skip int num and err code
     sti
     iretq
 %endmacro
 
 ; Low level ISR routine calling exception handler (ERR)
 %macro except_isr_err 1
+    cli
+    push %1
     pushaq
     ; initial rsp is now at rsp+15*8
 
-    mov rdi, %1         ; first is exceptnum
-    mov rsi, rsp        ; second is pointer to interrupt_stack_frame_s struct
-    mov rdx, [rsp+15*8] ; 3rd is the error code
+    mov rdi, rsp        ; pointer to interrupt_stack_frame_s struct
 
     cld
-    call except_handler  ; in exceptions.c
+    call except_handler ; in exceptions.c
 
     popaq
+    add rsp, 16         ; skip int num and err code
     sti
     iretq
 %endmacro
@@ -83,17 +86,19 @@ section .text
 ; Low level ISR routine calling exception handler (RESERVED)
 %macro except_isr_res 1
 except_%1:
+    push 0
+    push %1
+    cli
     pushaq
     ; initial rsp is now at rsp+15*8
 
-    mov rdi, %1         ; first is exceptnum
-    mov rsi, rsp        ; second is pointer to interrupt_stack_frame_s struct
-    mov rdx, 0          ; 3rd is the error code
+    mov rdi, rsp        ; pointer to interrupt_stack_frame_s struct
 
     cld
-    call except_handler  ; in exceptions.c
+    call except_handler ; in exceptions.c
 
     popaq
+    add rsp, 16         ; skip int num and err code
     sti
     iretq
 %endmacro

@@ -25,6 +25,10 @@ void panic(interrupt_stack_frame_s *stackframe, const char *fmt, ...)
                 stackframe->r11, stackframe->r12);
         kprint("R13=0x%x    R14=0x%x    R15=0x%x\n", stackframe->r13,
                 stackframe->r14, stackframe->r15);
+        kprint("CS =0x%x    SS =0x%x    RSP=0x%x\n", stackframe->cs,
+                stackframe->ss, stackframe->rsp);
+        kprint("RIP=0x%x                           RFLAGS=0x%x\n",
+                stackframe->rip, stackframe->rflags);
         kprint("---\n");
     }
     else
