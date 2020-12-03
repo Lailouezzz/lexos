@@ -53,6 +53,7 @@ section .text
 
     mov rdi, %1     ; first arg is exceptnum
     mov rsi, rsp    ; second arg is pointer to regs_s struct
+    mov rdx, 0      ; 3rd is the error code
 
     cld
     call except_handler  ; in exceptions.c
@@ -70,6 +71,24 @@ section .text
     mov rdi, %1         ; first is exceptnum
     mov rsi, rsp        ; second is pointer to interrupt_stack_frame_s struct
     mov rdx, [rsp+15*8] ; 3rd is the error code
+
+    cld
+    call except_handler  ; in exceptions.c
+
+    popaq
+    sti
+    iretq
+%endmacro
+
+; Low level ISR routine calling exception handler (RESERVED)
+%macro except_isr_res 1
+except_%1:
+    pushaq
+    ; initial rsp is now at rsp+15*8
+
+    mov rdi, %1         ; first is exceptnum
+    mov rsi, rsp        ; second is pointer to interrupt_stack_frame_s struct
+    mov rdx, 0          ; 3rd is the error code
 
     cld
     call except_handler  ; in exceptions.c
@@ -98,6 +117,7 @@ except_nm: /* Device note available (no math coprocessor) */
     except_isr_noerr EXCEPT_NM_VEC
 except_df: /* Double fault */
     except_isr_err EXCEPT_DF_VEC
+except_isr_res 09
 except_ts: /* Invalid TSS */
     except_isr_err EXCEPT_TS_VEC
 except_np: /* Segment not present */
@@ -108,6 +128,7 @@ except_gp: /* General protection */
     except_isr_err EXCEPT_GP_VEC
 except_pf: /* Page fault */
     except_isr_err EXCEPT_PF_VEC
+except_isr_res 15
 except_mf: /* x87 FPU Floating-point error */
     except_isr_noerr EXCEPT_MF_VEC
 except_ac: /* Alignment check */
@@ -118,6 +139,17 @@ except_xm: /* SIMD Floating-point exception */
     except_isr_noerr EXCEPT_XM_VEC
 except_ve: /* Virtualization exception */
     except_isr_noerr EXCEPT_VE_VEC
+except_isr_res 21
+except_isr_res 22
+except_isr_res 23
+except_isr_res 24
+except_isr_res 25
+except_isr_res 26
+except_isr_res 27
+except_isr_res 28
+except_isr_res 29
+except_isr_res 30
+except_isr_res 31
 
 
 section .data
@@ -135,17 +167,26 @@ except_isr_table:
     dq except_ud    /* Invalid opcode */
     dq except_nm    /* Device note available (no math coprocessor) */
     dq except_df    /* Double fault */
-    dq 0            /* Coprocessor segment overrune (reserved) */
+    dq except_09    /* Coprocessor segment overrune (reserved) */
     dq except_ts    /* Invalid TSS */
     dq except_np    /* Segment not present */
     dq except_ss    /* Stack segment fault */
     dq except_gp    /* General protection */
     dq except_pf    /* Page fault */
-    dq 0            /* Intel reserved */
+    dq except_15    /* Reserved */
     dq except_mf    /* x87 FPU Floating-point error */
     dq except_ac    /* Alignment check */
     dq except_mc    /* Machine check */
     dq except_xm    /* SIMD Floating-point exception */
     dq except_ve    /* Virtualization exception */
-    times 32 - (($ - except_isr_table) / 8) dq 0 
-    /* 21 to 31 include is intel reserved so 32 exceptions */
+    dq except_21    /* Reserved */
+    dq except_22    /* Reserved */
+    dq except_23    /* Reserved */
+    dq except_24    /* Reserved */
+    dq except_25    /* Reserved */
+    dq except_26    /* Reserved */
+    dq except_27    /* Reserved */
+    dq except_28    /* Reserved */
+    dq except_29    /* Reserved */
+    dq except_30    /* Reserved */
+    dq except_31    /* Reserved */

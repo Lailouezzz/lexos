@@ -16,7 +16,7 @@ create-image: $(BOOTABLE_IMG)
 # Run image on qemu
 
 run-qemu: $(BOOTABLE_IMG)
-	$(call qcmd,qemu-system-x86_64 -m 2G -hda $(BOOTABLE_IMG))
+	$(call qcmd,qemu-system-x86_64 -m 2G -smp 4 -hda $(BOOTABLE_IMG))
 
 # Run image on qemu debug mode
 
@@ -24,7 +24,7 @@ run-qemu-debug: $(BOOTABLE_IMG)
 	$(if $(DEBUG),, \
 		$(call wmsg,Warning : debugging with qemu without debug symbols) \
 	)
-	$(call qcmd,qemu-system-x86_64 -m 2G -hda $(BOOTABLE_IMG) -S -s)
+	$(call qcmd,qemu-system-x86_64 -m 2G -smp 4 -hda $(BOOTABLE_IMG) -S -s)
 
 # Mostly clean (clean everything but the end result)
 

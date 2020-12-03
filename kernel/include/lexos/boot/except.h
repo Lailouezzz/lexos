@@ -6,6 +6,7 @@
 #include "util.h"
 
 
+/* TODO : move this struct into other header */
 typedef struct {
     uint64_t rdx;
     uint64_t rcx;

@@ -1,23 +1,9 @@
 #include "lexos/boot/idt.h"
 
 
-#define SET_IDT_ENTRY(v, off, attr, sel, _ist) \
-        idt_entries[v].offset_low16 = ((uintptr_t)off) & 0xFFFF; \
-        idt_entries[v].offset_mid16 = (((uintptr_t)off) >> 16) & 0xFFFF; \
-        idt_entries[v].offset_hig32 = (((uintptr_t)off) >> 32) & 0xFFFFFFFF; \
-        \
-        idt_entries[v].type_attr = attr; \
-        \
-        idt_entries[v].selector = sel; \
-        \
-        idt_entries[v].ist = _ist; \
-        \
-        idt_entries[v].zero = 0;
-
-
 /* Define the IDT */
 
-idt_entry_s idt_entries[256] = { 0 };
+idt_entry_s idt_entries[IDT_ENTRIES_NUM] = { 0 };
 idt_pointer_s idt_pointer = {
     .limit = sizeof(idt_entries),
     .offset = idt_entries
@@ -28,13 +14,21 @@ void idt_init(void)
 {
     /* Set exceptions entries */
     for (size_t i = 0;
+            i < 3; i++)
+    {
+        idt_entries[i] = IDT_ENTRY(except_isr_table[i], IDT_INT_GATE, 0x08, 0);
+    }
+
+    idt_entries[3] = IDT_ENTRY(except_isr_table[3], IDT_TRAP_GATE, 0x08, 0);
+    idt_entries[4] = IDT_ENTRY(except_isr_table[4], IDT_TRAP_GATE, 0x08, 0);
+
+    for (size_t i = 5;
             i < sizeof(except_isr_table) / sizeof(*except_isr_table); i++)
     {
-        if (except_isr_table[i])
-        {
-            SET_IDT_ENTRY(i, except_isr_table[i], 0x8E, 0x08, 0);
-        }
+        idt_entries[i] = IDT_ENTRY(except_isr_table[i], IDT_INT_GATE, 0x08, 0);
     }
+
+    /* TODO : insert syscall interrupt */
 
     /* Let's load IDT */
     asm volatile(

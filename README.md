@@ -26,7 +26,6 @@ sudo make install
 
 ## TODO
 
--   Implement the ACPI tables and parsing
 -   Setup APIC
 -   PMM
 -   VMM
