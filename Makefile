@@ -49,6 +49,8 @@ mrproper: clean
 	$(call qcmd,$(RM) -f $(BOOTABLE_IMG))
 	$(call rmsg,Removing the makefile configuration)
 	$(call qcmd,$(RM) -f Makefile.cfg)
+	$(call rmsg,Cleaning submodule limine)
+	$(call qcmd,$(MAKE) -C ./thirdparty/limine distclean)
 
 # Remake everything
 
@@ -88,19 +90,27 @@ $(K_OBJ_DIR)%.s: $(K_SRC_DIR)%.S
 # Bootable image run qemu etc
 # ---
 
-$(BOOTABLE_IMG): $(K_BIN) limine.cfg
+$(BOOTABLE_IMG): $(K_BIN) limine.cfg ./thirdparty/limine/limine-install
 	$(call qcmd,$(RM) -f $@)
 	$(call qcmd,dd if=/dev/zero bs=1M count=0 seek=64 of=$@)
 	$(call qcmd,parted -s $@ mklabel msdos)
 	$(call qcmd,parted -s $@ mkpart primary 1 100%)
 	$(call qcmd,echfs-utils -m -p0 $@ quick-format 32768)
-	$(call qcmd,echfs-utils -m -p0 $@ import $< kernel.elf)
+	$(call qcmd,echfs-utils -m -p0 $@ import $(K_BIN) kernel.elf)
 	$(call qcmd,echfs-utils -m -p0 $@ import limine.cfg limine.cfg)
 	$(call qcmd,echfs-utils -m -p0 $@ import ../limine/stage2.map stage2.map)
-	$(call qcmd,../limine/limine-install ../limine/limine.bin $@)
+	$(call qcmd,./thirdparty/limine/limine-install \
+			./thirdparty/limine/limine.bin $@)
 	$(call omsg,You can now run the $(BOOTABLE_IMG) on qemu (make run-qemu))
 
 .PHONY: all-kernel
+
+# ---
+# Third pary targets
+# ---
+
+./thirdparty/limine/limine-install:
+	$(call qcmd,$(MAKE) -C ./thirdparty/limine limine-install)
 
 # ---
 # Errors targets

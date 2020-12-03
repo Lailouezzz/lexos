@@ -6,14 +6,21 @@
 
 To build LexOS : 
 
-Clone 
-[limine](https://github.com/limine-bootloader/limine) in the parent directory 
-of lexos repositery and build limine-install (for bootable image) 
+Clone [lexos](https://github.com/Lailouezzz/lexos) with submodules :
 
 ```sh
-cd ../ && git clone https://github.com/limine-bootloader/limine.git
-cd limine && make limine-install
+git clone --recurse-submodules https://github.com/Lailouezzz/lexos
 ```
+
+or
+
+```sh
+git clone https://github.com/Lailouezzz/lexos
+cd lexos
+git submodule update --init --recursive
+```
+
+---
 
 Install [echfs](https://github.com/echfs/echfs) utils :
 
