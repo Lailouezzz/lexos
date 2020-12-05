@@ -10,8 +10,18 @@
  * Define stivale2 tag identifiers
  */
 
-#define S2_ID_RSDP 0x9e1786930a375e78
-#define S2_ID_FIRMWARE 0x359d837855e3858c
+#define S2_TAG_ID_RSDP      0x9e1786930a375e78
+#define S2_TAG_ID_FIRMWARE  0x359d837855e3858c
+#define S2_TAG_ID_MMAP      0x2187f79e8612de07
+
+/* Map entry type */
+#define S2_MMAP_USABLE                  1
+#define S2_MMAP_RESERVED                2
+#define S2_MMAP_ACPI_RECLAIMABLE        3
+#define S2_MMAP_ACPI_NVS                4
+#define S2_MMAP_BAD_MEMORY              5
+#define S2_MMAP_BOOTLOADER_RECLAIMABLE  0x1000
+#define S2_MMAP_KERNEL_AND_MODULES      0x1001
 
 
 /*
@@ -33,6 +43,20 @@ typedef struct {
     s2_tag_s base;
     uint64_t flags;         // Bit 0: 0 = UEFI, 1 = BIOS
 } __PACKED s2_tag_firmware_s;
+
+/* Map entry */
+typedef struct {
+    void *base;
+    uint64_t len;
+    uint32_t type; /* S2_MMAP_**** */
+    uint32_t unused;
+} __PACKED s2_mmap_entry_s;
+
+typedef struct {
+    s2_tag_s base;
+    uint64_t numentries;
+    s2_mmap_entry_s entries[];
+} __PACKED s2_tag_mmap_s;
 
 /* Boot struct */
 typedef struct {
@@ -61,7 +85,7 @@ typedef struct {
     uint64_t flags;         // Bit 0: if 1, enable KASLR
                             // All other bits undefined
 
-    void *tags;             // Pointer to the first of the linked list of tags.
+    s2_tag_s *tags;         // Pointer to the first of the linked list of tags.
                             // see "stivale2 header tags" section.
                             // NULL = no tags.
 } __PACKED s2_header_s;
@@ -71,6 +95,13 @@ typedef struct {
 void s2_init(s2_struct_s *args);
 /* Return stivale2 tag ptr if tag find, NULL if not */
 s2_tag_s *s2_find_tag(uint64_t id);
+
+/* TODO : delete s2_print_*** function */
+
+/* Print all avaible tags */
+void s2_print_tags(void);
+/* Print memory map */
+void s2_print_mmap(void);
 
 
 #endif /// #ifndef H_LEXOS_BOOT_STIVALE2

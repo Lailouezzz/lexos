@@ -3,7 +3,7 @@ ENTRY(kmain)
 SECTIONS
 {
     kernel_virt_offset = 0xffffffff80000000;
-    . = kernel_virt_offset + 0x100000;
+    . = kernel_virt_offset + 1M;
 
 
     .stivale2hdr ALIGN(4K) :

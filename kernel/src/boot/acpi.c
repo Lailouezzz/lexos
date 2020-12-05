@@ -30,7 +30,7 @@ int acpi_checksum(const void *ptr, size_t size)
 
 void acpi_init()
 {
-    s2_tag_rsdp_s *tag_rsdp = ((s2_tag_rsdp_s *)s2_find_tag(S2_ID_RSDP));
+    s2_tag_rsdp_s *tag_rsdp = ((s2_tag_rsdp_s *)s2_find_tag(S2_TAG_ID_RSDP));
 
     if (!tag_rsdp)
     {

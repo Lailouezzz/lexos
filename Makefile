@@ -18,11 +18,11 @@ create-uefi-image: $(UEFI_IMG)
 # Run image on qemu
 
 run-qemu: $(BOOTABLE_IMG)
-	$(call qcmd,qemu-system-x86_64 -m 2G -smp 4 -hda $(BOOTABLE_IMG))
+	$(call qcmd,qemu-system-x86_64 -m 8G -smp 4 -hda $(BOOTABLE_IMG))
 
 run-uefi-qemu: $(UEFI_IMG)
 	$(call qcmd,qemu-system-x86_64 -L /usr/share/edk2/ovmf/ -bios OVMF_CODE.fd \
-			-m 2G -smp 4 -hda $(UEFI_IMG))
+			-m 8G -smp 4 -hda $(UEFI_IMG))
 
 # Run image on qemu debug mode
 
@@ -30,14 +30,14 @@ run-qemu-debug: $(BOOTABLE_IMG)
 	$(if $(DEBUG),, \
 		$(call wmsg,Warning : debugging with qemu without debug symbols) \
 	)
-	$(call qcmd,qemu-system-x86_64 -m 2G -smp 4 -hda $(BOOTABLE_IMG) -S -s)
+	$(call qcmd,qemu-system-x86_64 -m 8G -smp 4 -hda $(BOOTABLE_IMG) -S -s)
 
 run-uefi-qemu-debug: $(UEFI_IMG)
 	$(if $(DEBUG),, \
 		$(call wmsg,Warning : debugging with qemu without debug symbols) \
 	)
 	$(call qcmd,qemu-system-x86_64 -L /usr/share/edk2/ovmf/ -bios OVMF_CODE.fd \
-			-m 2G -smp 4 -hda $(UEFI_IMG) -S -s)
+			-m 8G -smp 4 -hda $(UEFI_IMG) -S -s)
 
 # Mostly clean (clean everything but the end result)
 

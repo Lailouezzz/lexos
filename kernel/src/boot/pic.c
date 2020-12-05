@@ -25,10 +25,14 @@ void pic_remap(void)
     
     PORT_OUTB(PIC_MPORT_D, m1);
     PORT_OUTB(PIC_SPORT_D, m2);
+
+    return;
 }
 
 void pic_disable(void)
 {
     PORT_OUTB(PIC_MPORT_D, 0xFF);
     PORT_OUTB(PIC_SPORT_D, 0xFF);
+
+    return;
 }
