@@ -1,5 +1,5 @@
-#ifndef H_LEXOS_BOOT_PIC
-#define H_LEXOS_BOOT_PIC
+#ifndef H_LEXOS_ARCH_PIC
+#define H_LEXOS_ARCH_PIC
 #include <stdint.h>
 #include <stddef.h>
 #include "lexos/asm/ioport.h"
@@ -25,4 +25,4 @@ void pic_remap(void);
 void pic_disable(void);
 
 
-#endif /// #ifndef H_LEXOS_BOOT_PIC
+#endif /// #ifndef H_LEXOS_ARCH_PIC

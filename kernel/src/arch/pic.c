@@ -1,4 +1,4 @@
-#include "lexos/boot/pic.h"
+#include "lexos/arch/pic.h"
 
 
 void pic_remap(void)

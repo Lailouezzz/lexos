@@ -1,6 +1,6 @@
 #include "lexos/panic.h"
 
-#include "lexos/boot/except.h"
+#include "lexos/arch/except.h"
 
 
 /* Exception messages */

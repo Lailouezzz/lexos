@@ -6,10 +6,7 @@
 #include "util.h"
 
 
-/*
- * Define stivale2 tag identifiers
- */
-
+/* Define stivale2 tag identifiers */
 #define S2_TAG_ID_RSDP      0x9e1786930a375e78
 #define S2_TAG_ID_FIRMWARE  0x359d837855e3858c
 #define S2_TAG_ID_MMAP      0x2187f79e8612de07

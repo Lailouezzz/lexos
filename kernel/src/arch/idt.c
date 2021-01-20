@@ -1,4 +1,4 @@
-#include "lexos/boot/idt.h"
+#include "lexos/arch/idt.h"
 
 
 /* Define the IDT */

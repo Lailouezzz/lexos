@@ -1,5 +1,5 @@
-#ifndef H_LEXOS_BOOT_APIC
-#define H_LEXOS_BOOT_APIC
+#ifndef H_LEXOS_ARCH_APIC
+#define H_LEXOS_ARCH_APIC
 #include <stdint.h>
 #include <stddef.h>
 #include "lexos/boot/acpi.h"
@@ -9,4 +9,4 @@
 void apic_find(acpi_madt_s *madt);
 
 
-#endif /// #ifndef H_LEXOS_BOOT_APIC
+#endif /// #ifndef H_LEXOS_ARCH_APIC

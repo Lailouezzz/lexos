@@ -58,7 +58,6 @@ void vga_text_return(void)
 
 int kvprint(const char *fmt, va_list args)
 {
-
     while (1)
     {
         /* *

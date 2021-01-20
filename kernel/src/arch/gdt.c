@@ -1,4 +1,4 @@
-#include "lexos/boot/gdt.h"
+#include "lexos/arch/gdt.h"
 
 
 /* Define the GDT */

@@ -1,5 +1,5 @@
-#ifndef H_LEXOS_BOOT_EXCEPT
-#define H_LEXOS_BOOT_EXCEPT
+#ifndef H_LEXOS_ARCH_EXCEPT
+#define H_LEXOS_ARCH_EXCEPT
 #include <stdint.h>
 #include <stddef.h>
 #include "lexos/asm/except.h"
@@ -37,4 +37,4 @@ typedef struct {
 extern void * const except_isr_table[32];
 
 
-#endif /// #ifndef H_LEXOS_BOOT_EXCEPT
+#endif /// #ifndef H_LEXOS_ARCH_EXCEPT

@@ -1,7 +1,7 @@
 #include <cpuid.h>
 #include "lexos/panic.h"
 
-#include "lexos/boot/cpu.h"
+#include "lexos/arch/cpu.h"
 
 
 void cpu_check(void)

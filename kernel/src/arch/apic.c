@@ -1,7 +1,7 @@
 #include "lexos/kprint.h"
 #include "lexos/panic.h"
 
-#include "lexos/boot/apic.h"
+#include "lexos/arch/apic.h"
 
 
 /* Local variable */

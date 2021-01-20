@@ -1,5 +1,5 @@
-#ifndef H_LEXOS_BOOT_CPU
-#define H_LEXOS_BOOT_CPU
+#ifndef H_LEXOS_ARCH_CPU
+#define H_LEXOS_ARCH_CPU
 #include <stdint.h>
 #include "util.h"
 
@@ -8,4 +8,4 @@
 void cpu_check(void);
 
 
-#endif /// #ifndef H_LEXOS_BOOT_CPU
+#endif /// #ifndef H_LEXOS_ARCH_CPU

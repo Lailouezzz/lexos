@@ -1,10 +1,10 @@
-#include "lexos/boot/cpu.h"
-#include "lexos/boot/gdt.h"
-#include "lexos/boot/idt.h"
+#include "lexos/arch/cpu.h"
+#include "lexos/arch/gdt.h"
+#include "lexos/arch/idt.h"
 #include "lexos/boot/stivale2.h"
 #include "lexos/boot/acpi.h"
-#include "lexos/boot/pic.h"
-#include "lexos/boot/apic.h"
+#include "lexos/arch/pic.h"
+#include "lexos/arch/apic.h"
 #include "lexos/kprint.h"
 
 

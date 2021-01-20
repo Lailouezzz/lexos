@@ -1,6 +1,6 @@
 #ifndef H_LEXOS_PANIC
 #define H_LEXOS_PANIC
-#include "lexos/boot/except.h"
+#include "lexos/arch/except.h"
 #include "util.h"
 
 
